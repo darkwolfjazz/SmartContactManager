@@ -1,2 +1,22 @@
-package com.scm.SmartContactManager.Entities;public class SocialLink {
+package com.scm.SmartContactManager.Entities;
+
+import jakarta.persistence.*;
+import lombok.*;
+
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
+@Entity
+public class SocialLink {
+
+@Id
+@GeneratedValue(strategy = GenerationType.IDENTITY)
+private Long id;
+private String link;
+private String title;
+@ManyToOne
+private Contacts contact;
+
 }
