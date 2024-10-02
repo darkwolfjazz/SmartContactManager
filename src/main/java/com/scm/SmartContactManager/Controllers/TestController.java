@@ -1,6 +1,9 @@
 package com.scm.SmartContactManager.Controllers;
 
+import com.scm.SmartContactManager.Entities.User;
+import com.scm.SmartContactManager.Services.UserService;
 import com.scm.SmartContactManager.forms.UserForm;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -9,6 +12,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 @Controller
 public class TestController {
+
+    @Autowired
+    private UserService userService;
+
 
 @GetMapping("/test")
     public String test(){
@@ -61,6 +68,14 @@ public String servicePage(Model model){
     public String processRegister(@ModelAttribute UserForm userForm){
         System.out.println("Inside Process Registration");
         System.out.println(userForm);
+        User user=new User();
+        user.setName(userForm.getName());
+        user.setEmail(userForm.getEmail());
+        user.setPassword(userForm.getPassword());
+        user.setAbout(userForm.getAbout());
+        user.setPhoneNumber(userForm.getPhoneNumber());
+       User savedUser= userService.saveUser(user);
+        System.out.println("User is saved");
     return "redirect:/signup";
     }
 
