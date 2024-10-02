@@ -1,8 +1,12 @@
 package com.scm.SmartContactManager.Controllers;
 
+import com.scm.SmartContactManager.forms.UserForm;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
+
 @Controller
 public class TestController {
 
@@ -41,10 +45,26 @@ public String servicePage(Model model){
         return "login";
     }
     @GetMapping("/signup")
-    public String singupPage(){
-        System.out.println("Contact Page loading");
+    public String singupPage(Model model){
+        UserForm userForm=new UserForm();
+//        userForm.setName("Rahul");
+//        userForm.setEmail("abc@gmail.com");
+//        userForm.setPassword("abcde");
+//        userForm.setPhoneNumber("123456789");
+//        userForm.setAbout("hello world");
+        model.addAttribute("userForm",userForm);
         return "register";
     }
+
+    //Processing signup of user
+    @PostMapping("/do-register")
+    public String processRegister(@ModelAttribute UserForm userForm){
+        System.out.println("Inside Process Registration");
+        System.out.println(userForm);
+    return "redirect:/signup";
+    }
+
+
 
 
 
