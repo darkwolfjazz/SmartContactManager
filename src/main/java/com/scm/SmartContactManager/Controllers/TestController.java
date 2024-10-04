@@ -3,12 +3,19 @@ package com.scm.SmartContactManager.Controllers;
 import com.scm.SmartContactManager.Entities.User;
 import com.scm.SmartContactManager.Services.UserService;
 import com.scm.SmartContactManager.forms.UserForm;
+import com.scm.SmartContactManager.helper.Message;
+import com.scm.SmartContactManager.helper.MessageTypeEnum;
+import jakarta.servlet.http.HttpSession;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+
+import java.util.Collections;
 
 @Controller
 public class TestController {
@@ -54,29 +61,35 @@ public String servicePage(Model model){
     @GetMapping("/signup")
     public String singupPage(Model model){
         UserForm userForm=new UserForm();
-//        userForm.setName("Rahul");
-//        userForm.setEmail("abc@gmail.com");
-//        userForm.setPassword("abcde");
-//        userForm.setPhoneNumber("123456789");
-//        userForm.setAbout("hello world");
         model.addAttribute("userForm",userForm);
         return "register";
     }
 
     //Processing signup of user
     @PostMapping("/do-register")
-    public String processRegister(@ModelAttribute UserForm userForm){
+    public String processRegister(@Valid @ModelAttribute UserForm userForm, BindingResult result, HttpSession session){
         System.out.println("Inside Process Registration");
         System.out.println(userForm);
+        //Validation ----
+        if(result.hasErrors()){
+            return "register";
+        }
+
         User user=new User();
         user.setName(userForm.getName());
         user.setEmail(userForm.getEmail());
         user.setPassword(userForm.getPassword());
         user.setAbout(userForm.getAbout());
         user.setPhoneNumber(userForm.getPhoneNumber());
-       User savedUser= userService.saveUser(user);
+        User savedUser= userService.saveUser(user);
         System.out.println("User is saved");
-    return "redirect:/signup";
+        //adding message upon signup
+
+        Message message=Message.builder().content("Registration successful !").type(MessageTypeEnum.blue).build();
+
+
+        session.setAttribute("message",message);
+        return "redirect:/signup";
     }
 
 

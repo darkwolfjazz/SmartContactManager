@@ -38,3 +38,6 @@ src/main/resources/application.properties
 #ingore pom.xml
 pom.xml
 node_modules
+
+#ignore css files
+src\main\resources\static\css\

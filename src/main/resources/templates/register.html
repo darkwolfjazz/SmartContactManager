@@ -13,6 +13,12 @@
                 <!--card starts-->
                 <div
                     class="block p-6 border-t-[10px] border-blue-700 bg-white rounded-xl shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-blue-700 dark:hover:bg-gray-700">
+                   
+                    <!--message here-->
+                   
+                   <div data-th-replace="~{message::messagebox}">
+                   </div>
+
                     <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Signup Here </h5>
                     <p class="font-normal text-gray-400 dark:text-gray-400">Start managing your contacts on cloud...
                     </p>
@@ -20,7 +26,9 @@
                     data-th-action="@{'/do-register'}" 
                     method="post" 
                     data-th-object="${userForm}"
-                    class="mt-4">
+                    class="mt-4"
+                    novalidate
+                    >
                         <!--username input field-->
                         <div class="mb-3">
                             <label for="text"
@@ -30,7 +38,13 @@
                             id="name"
                             data-th-field="*{name}"    
                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                placeholder="Enter Here..." required />
+                                placeholder="Enter Here..." required 
+                                />
+                            <p 
+                            data-th-if="${#fields.hasErrors('name')}"
+                            data-th-errors="*{name}" 
+                            class="text-red-600 px-1 py-2">User is required
+                        </p>    
                         </div>
                         <!--Email input field-->
                         <div class="mb-3">
@@ -41,7 +55,14 @@
                             id="email"
                             data-th-field="*{email}"  
                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                placeholder="Please Enter Your email here" required />
+                                placeholder="Please Enter Your email here" required 
+                                />
+
+                                <p 
+                                data-th-if="${#fields.hasErrors('email')}"
+                                data-th-errors="*{email}" 
+                                class="text-red-600 px-1 py-2">
+                            </p>          
                         </div>
 
                         <!--password input field-->
@@ -53,7 +74,13 @@
                             id="password"
                             data-th-field="*{password}"      
                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                placeholder="Enter Your Password here..." required />
+                                placeholder="Enter Your Password here..." required 
+                                />
+                                <p 
+                                data-th-if="${#fields.hasErrors('password')}"
+                                data-th-errors="*{password}" 
+                                class="text-red-600 px-1 py-2">
+                            </p>            
                         </div>
 
                        <!--ContactNumber input field-->
@@ -65,7 +92,13 @@
                         id="phone"
                         data-th-field="*{phoneNumber}"      
                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                            placeholder="Enter Your Contact Number" required />
+                            placeholder="Enter Your Contact Number" required 
+                            />
+                            <p 
+                            data-th-if="${#fields.hasErrors('phoneNumber')}"
+                            data-th-errors="*{phoneNumber}" 
+                            class="text-red-600 px-1 py-2">
+                        </p>        
                     </div> 
                     <!--About section-->
        <div class="mb-3">             
@@ -76,6 +109,11 @@ rows="6"
 data-th-field="*{about}"      
 class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
     placeholder="Write Here ..."></textarea>
+    <p 
+    data-th-if="${#fields.hasErrors('about')}"
+    data-th-errors="*{about}" 
+    class="text-red-600 px-1 py-2">User is required
+</p>    
                 </div>
                 <!--buttons here -->
             <div class="mb-3 flex justify-center space-x-3">
