@@ -23,6 +23,10 @@ public class TestController {
     @Autowired
     private UserService userService;
 
+    @GetMapping("/")
+    public String index(){
+        return "redirect:/home";
+    }
 
 @GetMapping("/test")
     public String test(){
@@ -32,6 +36,7 @@ public class TestController {
 @GetMapping("/home")
 public String home(Model model) {
     //model.addAttribute("page","home");
+    System.out.println("Home page loading...");
     return "home";
 }
 
