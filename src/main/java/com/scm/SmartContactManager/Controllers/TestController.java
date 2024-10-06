@@ -39,7 +39,6 @@ public String home(Model model) {
     System.out.println("Home page loading...");
     return "home";
 }
-
 @GetMapping("/about")
     public String aboutPage(Model model){
     System.out.println("About Page loading!");
@@ -61,6 +60,7 @@ public String servicePage(Model model){
 }
     @GetMapping("/login")
     public String loginPage(){
+        System.out.println("Login Page showing up !");
         return "login";
     }
     @GetMapping("/signup")

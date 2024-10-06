@@ -41,3 +41,5 @@ node_modules
 
 #ignore css files
 src\main\resources\static\css\
+src/main/resources/static/css/output.css
+src/main/resources/static/css/output.css
