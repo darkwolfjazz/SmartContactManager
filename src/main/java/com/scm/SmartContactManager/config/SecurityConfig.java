@@ -44,6 +44,10 @@ public class SecurityConfig {
     @Autowired
     private SecurityCustomUserServiceImpl userDetailService;
 
+    @Autowired
+    private OauthAuthenticationSuccessHandler oauthAuthenticationSuccessHandler;
+
+
 
     //configuration to restrict/permit the endpoints
 
@@ -82,6 +86,15 @@ public class SecurityConfig {
             logoutForm.logoutUrl("/logout");
             logoutForm.logoutSuccessUrl("/login?logout=true");
         });
+
+        //oauth configuration
+        httpSecurity.oauth2Login(oath->{
+            oath.loginPage("/login");
+            oath.successHandler(oauthAuthenticationSuccessHandler);
+        });
+
+
+
         return httpSecurity.build();
     }
 
