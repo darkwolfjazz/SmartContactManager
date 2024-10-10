@@ -28,7 +28,7 @@ public class UserController {
     //user profile page
     @RequestMapping("/profile")
     public String userProfile(Authentication authentication){
-       String username= PrincipalHelper.getEmailOfLoggedInUser(authentication);
+       String username= PrincipalHelper.getEmailofLoggedInUser(authentication);
         logger.info("User logged in :{}" ,username);
         return "user/profile";
     }

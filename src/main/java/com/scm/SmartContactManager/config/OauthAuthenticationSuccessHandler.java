@@ -29,10 +29,10 @@ public class OauthAuthenticationSuccessHandler implements AuthenticationSuccessH
 
     Logger logger= LoggerFactory.getLogger(OauthAuthenticationSuccessHandler.class);
 
+
     @Override
     public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException, ServletException {
         logger.info("Inside OauthAuthenticationSuccessHandler class");
-
 
         //identify the provider
         var oAuth2AuthenticationToken = (OAuth2AuthenticationToken) authentication;
