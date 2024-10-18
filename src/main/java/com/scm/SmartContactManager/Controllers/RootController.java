@@ -22,7 +22,6 @@ public class RootController {
 
     @ModelAttribute
     public void addLoggedInUser(Model model, Authentication authentication) {
-
         if(authentication==null){
             return;
         }
@@ -31,9 +30,13 @@ public class RootController {
         logger.info("User logged in :{}", username);
         User user = userService.getUserByEmail(username);//username is our email only
         System.out.println(user);
+        if(user!=null) {
             System.out.println(user.getName());
             System.out.println(user.getEmail());
             model.addAttribute("loggedInUser", user);
+        }else{
+            System.out.println("User not found");
+        }
     }
 
 }
